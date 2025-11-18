@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>TikTok 18+ — только для взрослых</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-main: #05010b;
+      --bg-secondary: #120418;
+      --accent: #ff2e88;
+      --accent-soft: #ff7bbd;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(255, 255, 255, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #2b0633 0, #05010b 55%, #020008 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 1, 11, 0.96),
+        rgba(5, 1, 11, 0.82),
+        transparent
+      );
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 15px;
+    }
+
+    .logo-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #ffffff 0, #ff2e88 45%, #ff007f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+      box-shadow: 0 0 18px rgba(255, 46, 136, 0.6);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .badge-18 {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      color: #fecaca;
+      background: linear-gradient(
+        135deg,
+        rgba(127, 29, 29, 0.72),
+        rgba(190, 24, 93, 0.85)
+      );
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0b0210;
+      background: radial-gradient(circle at 0 0, #fee2e2 0, #fb7185 35%, #f97316 100%);
+      box-shadow:
+        0 0 15px rgba(251, 113, 133, 0.55),
+        0 0 40px rgba(248, 113, 113, 0.35);
+      transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, filter 0.14s ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      filter: brightness(1.05);
+      box-shadow:
+        0 0 24px rgba(251, 113, 133, 0.75),
+        0 0 60px rgba(248, 113, 113, 0.5);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      align-items: center;
+    }
+
+    /* ВИДЕО СРАЗУ ПОД ШАПКОЙ */
+    .hero-video-block {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-card {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      background: radial-gradient(circle at 0 0, #4c0519 0, #020617 50%, #000000 100%);
+      border-radius: 26px;
+      padding: 16px 16px 18px 16px;
+      border: 1px solid rgba(248, 250, 252, 0.06);
+      box-shadow:
+        0 40px 100px rgba(15, 23, 42, 0.95),
+        0 0 70px rgba(248, 113, 113, 0.45);
+      overflow: hidden;
+    }
+
+    .video-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .video-top-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #fecaca 0, #f97316 40%, #7f1d1d 100%);
+      box-shadow: 0 0 16px rgba(248, 113, 113, 0.7);
+    }
+
+    .video-chip {
+      border-radius: 999px;
+      padding: 4px 11px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 11px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      isolation: isolate;
+    }
+
+    .video-wrapper::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%; /* 16:9 */
+    }
+
+    video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .video-overlay-gradient {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      pointer-events: none;
+    }
+
+    .video-bottom-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 12px;
+      font-size: 11px;
+      color: #e5e7eb;
+      z-index: 5;
+    }
+
+    .video-bottom-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .video-stats {
+      display: flex;
+      gap: 8px;
+      color: #d1d5db;
+    }
+
+    .video-stat-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #fca5a5;
+    }
+
+    .video-bottom-right {
+      text-align: right;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(220, 38, 38, 0.9);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #fee2e2;
+      box-shadow: 0 0 12px rgba(254, 202, 202, 0.9);
+    }
+
+    .video-caption {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ТЕКСТ НИЖЕ ВИДЕО */
+    .hero-text {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 4px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(248, 250, 252, 0.08);
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.06), transparent 70%);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #f9fafb 0, #22c55e 45%, #15803d 100%);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 3vw + 10px, 40px);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #fb7185, #f97316, #f97316, #fb7185);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    .hero-sub b {
+      color: #e5e7eb;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hero-note b {
+      color: #fecaca;
+    }
+
+    /* Секции ниже */
+    .sections {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .section {
+      border-radius: 20px;
+      padding: 20px 18px;
+      background: radial-gradient(circle at 0 0, rgba(190, 24, 93, 0.13), transparent 60%);
+      border: 1px solid var(--border-soft);
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 620px;
+    }
+
+    .features {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .feature {
+      padding: 12px 12px 13px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(248, 250, 252, 0.06);
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(24, 24, 27, 0.98)
+      );
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.6);
+    }
+
+    .feature-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 11px;
+      color: #fed7aa;
+      background: rgba(88, 28, 135, 0.75);
+      border: 1px solid rgba(250, 250, 250, 0.12);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .label-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #fed7aa;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 16px 20px 20px 20px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #6b7280;
+      background: #020008;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(156, 163, 175, 0.4);
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+      border-bottom-style: solid;
+    }
+
+    @media (max-width: 640px) {
+      .video-card {
+        padding: 12px 10px 14px 10px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <div class="logo-badge">18+</div>
+          <span>TikTok18+ Night</span>
+        </div>
+        <div class="nav-right">
+          <span class="badge-18">Вход только 18+</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <!-- ВИДЕО В САМОМ ВЕРХУ -->
+        <div class="hero-video-block">
+          <div class="video-card">
+            <div class="video-top">
+              <div class="video-top-left">
+                <div class="avatar"></div>
+                <div>
+                  <div style="font-size:12px;">HotNight · эксклюзив</div>
+                  <div style="font-size:11px; color:var(--text-muted);">
+                    голые танцы · приват · 18+
+                  </div>
+                </div>
+              </div>
+              <div class="video-chip">Тизер контента внутри</div>
+            </div>
+
+            <div class="video-wrapper">
+              <video
+                id="heroVideo"
+                autoplay
+                muted
+                playsinline
+                controls
+              >
+                <!-- ЗДЕСЬ ТВОЙ ФАЙЛ -->
+                <source src="promo.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает тег video.
+              </video>
+
+              <div class="video-overlay-gradient"></div>
+              <div class="video-bottom-bar">
+                <div class="video-bottom-left">
+                  <div>Teaser · TikTok18+ Night</div>
+                  <div class="video-stats">
+                    <span>24.3k просмотров</span>
+                    <span class="video-stat-dot"></span>
+                    <span>🔥 9.8k лайков</span>
+                  </div>
+                </div>
+                <div class="video-bottom-right">
+                  <div class="live-pill">
+                    <span class="live-dot"></span>
+                    Live & Clips
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-caption">
+              Это только предварительный вкус. Внутри тебя ждут более откровенные клипы и
+              стрип, недоступные в обычных соцсетях.
+            </div>
+          </div>
+        </div>
+
+        <!-- ТЕКСТ СРАЗУ ПОД ВИДЕО -->
+        <div class="hero-text">
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            Стримы, клипы и приват без цензуры
+          </div>
+          <h1 class="hero-title">
+            Твой личный <span>TikTok 18+</span> — голые девушки в коротких и горячих видео
+          </h1>
+          <p class="hero-sub">
+            Здесь тебя ждут <b>откровенные танцы, пикантные движения и голые тела</b> без
+            цензуры. Реальные девушки, живые эмоции и контент, который не пропустит ни один
+            обычный сервис.
+          </p>
+          <div class="hero-note">
+            <b>Внимание:</b> только для совершеннолетних. Все модели старше 18 лет.
+          </div>
+        </div>
+      </section>
+
+      <!-- НИЖНИЕ БЛОКИ -->
+      <section class="sections">
+        <div class="section">
+          <div class="label">
+            <span class="label-dot"></span>
+            Что тебя ждет
+          </div>
+          <h2 class="section-title">Голые девушки, живые эмоции и честный формат 18+</h2>
+          <p class="section-sub">
+            Здесь не играют в приличия. Девушки снимают для взрослых: без лифчиков, без
+            цензуры, без строгих ограничений на движения. Ты листаешь ленту, как в
+            привычных приложениях — но каждый свайп ведет к еще более откровенному ролику.
+          </p>
+        </div>
+
+        <div class="section" id="join">
+          <div class="label">
+            <span class="label-dot"></span>
+            вход 18+
+          </div>
+          <h2 class="section-title">Подтверди возраст и переходи к TikTok18+</h2>
+          <p class="section-sub">
+            Дальше — только для совершеннолетних. Если тебе есть 18, ты можешь перейти к
+            ленте откровенных роликов с голыми девушками, которые не появятся в обычных
+            приложениях.
+          </p>
+
+          <!-- ЕДИНСТВЕННАЯ КНОПКА ДЛЯ СКАЧИВАНИЯ -->
+          <div style="margin-top:18px; padding:14px 12px; border-radius:14px; border:1px solid rgba(248,250,252,0.12); background:rgba(15,23,42,0.85); text-align:center;">
+            <p style="font-size:13px; margin:0 0 12px 0;">
+              Нажимая на кнопку, ты подтверждаешь, что тебе уже есть 18 лет и ты готов
+              перейти к просмотру откровенного контента для взрослых.
+            </p>
+            <button class="btn-primary">
+              Скачать приложение TikTok18+
+            </button>
+            <p style="font-size:11px; color:var(--text-muted); margin-top:8px;">
+              Если тебе нет 18 — немедленно покинь эту страницу.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          © <span id="year"></span> TikTok18+ Night. Только для совершеннолетних.
+          Все модели старше 18 лет.
+        </div>
+        <div class="footer-links">
+          <a href="#">Условия использования</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Правила 18+</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Текущий год в подвале
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Дополнительная попытка автозапуска видео
+    document.addEventListener("DOMContentLoaded", function () {
+      const video = document.getElementById("heroVideo");
+      if (!video) return;
+
+      const tryPlay = () => {
+        video.play().catch(() => {
+          // Браузер мог заблокировать автоплей — пользователь увидит плеер и включит сам.
+        });
+      };
+
+      tryPlay();
+    });
+  </script>
+</body>
+</html>
